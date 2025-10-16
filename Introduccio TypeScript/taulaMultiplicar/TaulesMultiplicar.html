@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ca">
+	<head>
+		<title>Taules de multiplicar</title>
+		<meta charset="UTF-8" />
+
+		<style>
+			body{font-family:Times New Roman,serif;}
+			table td{border:1px solid black;}
+			strong{color:#0000FF;}
+		</style>
+
+		<script src="firstSteps.js"></script>
+	</head>
+
+	<body onload="mostrar()">
+		<h3>Taules de multiplicar</h3>
+		Start <input type="number" id="start" min="0" max="100" step="1" value="1">&nbsp;&nbsp;&nbsp;
+		Stop <input type="number" id="stop" min="0" max="100" step="1" value="10">&nbsp;&nbsp;&nbsp;
+		N.col <input type="number" id="ncol" min="1" max="10" step="1" value="10">&nbsp;&nbsp;&nbsp;
+		<input type="button" value="Mostrar" onclick="mostrar()"><br><br>
+		<div id="tm"></div>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ca">
+	<head>
+		<title>Format</title>
+		<meta charset="UTF-8" />
+
+		<style>
+			h4{margin-top:1.5em;margin-bottom:0.3em;}
+			button{width:1.8em;height:1.8em;margin-top:3px;margin-bottom:3px;}
+			div{vertical-align:middle;display:inline-block;height:2em;margin-top:4px;border:1px solid black;background-color:#e0e0e0;overflow-x:auto;}
+		</style>
+
+		<script defer src="Format.js"></script>
+		
+		<script>
+			function _pvp() {
+				let preu = document.getElementById("preu").value;
+				let dte = document.getElementById("dte").value;
+				let iva = document.getElementById("iva").value;
+				let r = pvp(preu, dte, iva);
+				if (r != undefined) document.getElementById("total").innerHTML = r;
+			}
+
+			function _miniCalc(operacio) {
+				let n1 = document.getElementById("num1").value;
+				let n2 = document.getElementById("num2").value;
+				let r = miniCalc(n1, n2, operacio);
+				if (r != undefined) document.getElementById("resultat").innerHTML = r;
+			}
+		</script>
+	</head>
+
+	<body>
+		<h4>PVP ((preu - descompte) + IVA)</h4>
+			Preu &nbsp;&nbsp;<input style="margin-top:4px;margin-bottom:4px;" type="text" id="preu"><br>
+			% dte <input style="margin-top:4px;margin-bottom:4px;" type="text" id="dte"><br>
+			% IVA <input style="margin-top:4px;margin-bottom:4px;" type="text" id="iva"><br>
+			<button style="width:3.5em" onclick="_pvp()">Total</button>
+			<div id="total" style="width:10em"></div>
+		<h4>Minicalculadora</h4>
+			Num 1 <input style="margin-top:4px;margin-bottom:4px;" type="text" id="num1">
+			<button onclick="_miniCalc('+')">+</button>
+			<button onclick="_miniCalc('-')">-</button><br>
+			Num 2 <input style="margin-top:4px;margin-bottom:4px;" type="text" id="num2">
+			<button onclick="_miniCalc('*')">*</button>
+			<button onclick="_miniCalc('/')">/</button><br>
+			<div id="resultat" style="width:18.5em"></div>
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ca">
+	<head>
+		<title>Ciències</title>
+		<meta charset="UTF-8" />
+
+		<style>
+			h4{margin-top:1.5em;margin-bottom:0.3em;}
+			button{width:1.8em;height:1.8em;margin-top:3px;margin-bottom:3px;}
+			div{vertical-align:middle;display:inline-block;height:2em;margin-top:4px;border:1px solid black;background-color:#e0e0e0;overflow-x:auto;}
+		</style>
+
+		<script type="module" defer src="Ciencies.js"></script>
+		
+		<script>
+			function _imc() {
+				let r = imc(document.getElementById('pes').value, document.getElementById('altura').value);
+				if (r != undefined) {
+					let v = r.split("-");
+					document.getElementById("imc").innerHTML = v[0];
+					document.getElementById("categoria").innerHTML = v[1];
+				}
+			}
+			
+			function _convertidor() {
+				let r = convertidor(document.getElementById('m1').value, document.getElementById('cm1').value, document.getElementById('cm2').value);
+				if (r != undefined) document.getElementById("m2").innerHTML = r;
+			}
+
+			function _bigFloat() {
+				let r = bigFloat(document.getElementById('bigfloat').value);
+				if (r != undefined) document.getElementById("rbigfloat").innerHTML = r;
+			}
+			
+			function _interseccio() {
+				let r = interseccio(document.getElementById('rect1').value, document.getElementById('rect2').value);
+				if (r != undefined) document.getElementById("rect").innerHTML = r;
+			}
+		</script>
+	</head>
+
+	<body>
+		<h4>IMC</h4>
+			Calcula l'índex de massa corporal i la categoria corresponent.<br>
+			Pes (Kg) &nbsp; &nbsp; <input style="margin-top:4px;margin-bottom:4px;" type="text" id="pes"><br>
+			Altura (cm) <input style="margin-top:4px;margin-bottom:4px;" type="text" id="altura"><br>
+			<button style="width:3.5em" onclick="_imc()">IMC</button>
+			<div id="imc" style="width:4em"></div>
+			<div id="categoria" style="width:9.5em"></div>
+		<h4>Convertidor</h4>
+			Converteix unitats de longitud.<br>
+			<input id="m1" style="margin-top:4px;margin-bottom:4px;" oninput="_convertidor()" type="text">
+			<select id="cm1" onchange="_convertidor()">
+				<option value="mm">mm</option>
+				<option value="cm">cm</option>
+				<option value="dm">dm</option>
+				<option value="m" selected>m</option>
+				<option value="Dm">Dm</option>
+				<option value="Hm">Hm</option>
+				<option value="Km">Km</option>
+			</select>
+			<br>
+			<div id="m2" style="width:11em"></div>
+			<select id="cm2" onchange="_convertidor()">
+				<option value="mm">mm</option>
+				<option value="cm">cm</option>
+				<option value="dm">dm</option>
+				<option value="m" selected>m</option>
+				<option value="Dm">Dm</option>
+				<option value="Hm">Hm</option>
+				<option value="Km">Km</option>
+			</select>
+		<h4>BigFloat</h4>
+			Realitza operacions de suma (i multiplicació) entre<br>
+			dos números decimals amb un gran nombre de dígits.<br>
+			Operació <input type="text" id="bigfloat" size="50"> <button style="width:5em" onclick="_bigFloat()">Calcula!</button><br>
+			<div id="rbigfloat" style="width:35.5em"></div>
+		<h4>Intersecció</h4>
+			Comprova si hi ha intersecció entre dos rectangles.<br>
+			Les dades s'han d'introduir en el format <strong>x,y,w,h</strong>.<br>
+			<strong>x</strong> i <strong>y</strong> han de ser enters. <strong>w</strong> i <strong>h</strong> ha de ser enters i positius.<br>
+			Rect 1 <input style="margin-top:4px;margin-bottom:4px;" type="text" id="rect1"><br>
+			Rect 2 <input style="margin-top:4px;margin-bottom:4px;" type="text" id="rect2"><br>
+			<button style="width:3.5em" onclick="_interseccio()">Test</button>
+			<div id="rect" style="width:11.5em"></div>
+	</body>
+</html>

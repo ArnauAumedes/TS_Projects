@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ca">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Casa domòtica</title>
+		<style>
+			body { font-family: system-ui, sans-serif; margin: 16px; }
+			.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+			.card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; }
+			.row { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+			.col { display: flex; flex-direction: column; gap: 6px; }
+			label { display: flex; gap: 6px; align-items: center; }
+			select, input[type="number"] { padding: 4px 6px; }
+			input[type="number"] { width: 5.5rem; }
+			.act { font-size: .92em; color: #444; }
+			#log { margin-top: 16px; border: 1px dashed #aaa; padding: 8px; min-height: 80px; white-space: pre-wrap; }
+		</style>
+		<script type="module" defer src="casaDomotica.js"></script>
+	</head>
+	<body>
+		<h1>Casa domòtica</h1>
+		<p>Per cada habitació, configura els sensors i mostrarem l'estat dels actuadors.</p>
+
+		<div class="grid">
+			<!-- Sala -->
+			<section class="card" id="room-sala">
+				<h2>Sala</h2>
+				<div class="col">
+					<label><input type="checkbox" id="pres-sala"> Presència</label>
+					<label>Moment del dia
+						<select id="luz-sala">
+							<option value="dia">Dia</option>
+							<option value="nit">Nit</option>
+						</select>
+					</label>
+					<label>Temperatura
+						<input type="number" id="temp-sala" min="0" max="40" value="21"> ºC
+					</label>
+					<label><input type="checkbox" id="lluvia-sala"> Pluja</label>
+					<label><input type="checkbox" id="humo-sala"> Fum</label>
+				</div>
+				<div class="col act">
+					<div>Persianes: <span id="act-persiana-sala">-</span></div>
+					<div>Llum: <span id="act-llum-sala">-</span></div>
+					<div>Calefacció: <span id="act-calef-sala">-</span></div>
+					<div>Aire acond.: <span id="act-ac-sala">-</span></div>
+					<div>Extintor: <span id="act-extintor-sala">-</span></div>
+				</div>
+			</section>
+
+			<!-- Cuina -->
+			<section class="card" id="room-cuina">
+				<h2>Cuina</h2>
+				<div class="col">
+					<label><input type="checkbox" id="pres-cuina"> Presència</label>
+					<label>Moment del dia
+						<select id="luz-cuina">
+							<option value="dia">Dia</option>
+							<option value="nit">Nit</option>
+						</select>
+					</label>
+					<label>Temperatura
+						<input type="number" id="temp-cuina" min="0" max="40" value="21"> ºC
+					</label>
+					<label><input type="checkbox" id="lluvia-cuina"> Pluja</label>
+					<label><input type="checkbox" id="humo-cuina"> Fum</label>
+				</div>
+				<div class="col act">
+					<div>Persianes: <span id="act-persiana-cuina">-</span></div>
+					<div>Llum: <span id="act-llum-cuina">-</span></div>
+					<div>Calefacció: <span id="act-calef-cuina">-</span></div>
+					<div>Aire acond.: <span id="act-ac-cuina">-</span></div>
+					<div>Extintor: <span id="act-extintor-cuina">-</span></div>
+				</div>
+			</section>
+
+			<!-- Dormitori -->
+			<section class="card" id="room-dormitori">
+				<h2>Dormitori</h2>
+				<div class="col">
+					<label><input type="checkbox" id="pres-dormitori"> Presència</label>
+					<label>Moment del dia
+						<select id="luz-dormitori">
+							<option value="dia">Dia</option>
+							<option value="nit">Nit</option>
+						</select>
+					</label>
+					<label>Temperatura
+						<input type="number" id="temp-dormitori" min="0" max="40" value="21"> ºC
+					</label>
+					<label><input type="checkbox" id="lluvia-dormitori"> Pluja</label>
+					<label><input type="checkbox" id="humo-dormitori"> Fum</label>
+				</div>
+				<div class="col act">
+					<div>Persianes: <span id="act-persiana-dormitori">-</span></div>
+					<div>Llum: <span id="act-llum-dormitori">-</span></div>
+					<div>Calefacció: <span id="act-calef-dormitori">-</span></div>
+					<div>Aire acond.: <span id="act-ac-dormitori">-</span></div>
+					<div>Extintor: <span id="act-extintor-dormitori">-</span></div>
+				</div>
+			</section>
+
+			<!-- Bany -->
+			<section class="card" id="room-bany">
+				<h2>Bany</h2>
+				<div class="col">
+					<label><input type="checkbox" id="pres-bany"> Presència</label>
+					<label>Moment del dia
+						<select id="luz-bany">
+							<option value="dia">Dia</option>
+							<option value="nit">Nit</option>
+						</select>
+					</label>
+					<label>Temperatura
+						<input type="number" id="temp-bany" min="0" max="40" value="21"> ºC
+					</label>
+					<label><input type="checkbox" id="lluvia-bany"> Pluja</label>
+					<label><input type="checkbox" id="humo-bany"> Fum</label>
+				</div>
+				<div class="col act">
+					<div>Persianes: <span id="act-persiana-bany">-</span></div>
+					<div>Llum: <span id="act-llum-bany">-</span></div>
+					<div>Calefacció: <span id="act-calef-bany">-</span></div>
+					<div>Aire acond.: <span id="act-ac-bany">-</span></div>
+					<div>Extintor: <span id="act-extintor-bany">-</span></div>
+				</div>
+			</section>
+
+			<!-- Menjador -->
+			<section class="card" id="room-menjador">
+				<h2>Menjador</h2>
+				<div class="col">
+					<label><input type="checkbox" id="pres-menjador"> Presència</label>
+					<label>Moment del dia
+						<select id="luz-menjador">
+							<option value="dia">Dia</option>
+							<option value="nit">Nit</option>
+						</select>
+					</label>
+					<label>Temperatura
+						<input type="number" id="temp-menjador" min="0" max="40" value="21"> ºC
+					</label>
+					<label><input type="checkbox" id="lluvia-menjador"> Pluja</label>
+					<label><input type="checkbox" id="humo-menjador"> Fum</label>
+				</div>
+				<div class="col act">
+					<div>Persianes: <span id="act-persiana-menjador">-</span></div>
+					<div>Llum: <span id="act-llum-menjador">-</span></div>
+					<div>Calefacció: <span id="act-calef-menjador">-</span></div>
+					<div>Aire acond.: <span id="act-ac-menjador">-</span></div>
+					<div>Extintor: <span id="act-extintor-menjador">-</span></div>
+				</div>
+			</section>
+		</div>
+
+		<div class="row" style="margin-top: 12px;">
+			<button id="avaluar">Aplicar lògica</button>
+			<button id="modoAutomatico">Auto</button>
+		</div>
+		<div id="log" aria-live="polite"></div>
+
+	</body>
+	</html>
