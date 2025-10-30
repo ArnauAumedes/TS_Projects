@@ -51,6 +51,7 @@ const alumnes = [alumne1, alumne2, alumne3];
 function modificarAlumnes(alumnes) {
     // Clonar i modificar cada alumne
     const alumnesModificats = alumnes.map((alumne, index) => {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         // Crear una còpia profunda de l'alumne
         const alumneModificat = {
             nom: alumne.nom,
@@ -72,10 +73,10 @@ function modificarAlumnes(alumnes) {
                 blocs: [{ nom: "Bloc - Projecte", nota: 8 }]
             });
             // Canviar notes dels blocs existents
-            if (alumneModificat.moduls[0]?.blocs[0]) {
+            if ((_a = alumneModificat.moduls[0]) === null || _a === void 0 ? void 0 : _a.blocs[0]) {
                 alumneModificat.moduls[0].blocs[0].nota = 9; // Bloc 1 nota de 8 a 9
             }
-            if (alumneModificat.moduls[0]?.blocs[1]) {
+            if ((_b = alumneModificat.moduls[0]) === null || _b === void 0 ? void 0 : _b.blocs[1]) {
                 alumneModificat.moduls[0].blocs[1].nota = 8; // Bloc 2 nota de 7 a 8
             }
         }
@@ -85,14 +86,14 @@ function modificarAlumnes(alumnes) {
             alumneModificat.cognoms = "López González";
             alumneModificat.curs = 2; // Canviar de curs 1 a 2
             // Treure el primer bloc del primer mòdul
-            if (alumneModificat.moduls[0]?.blocs.length > 0) {
+            if (((_c = alumneModificat.moduls[0]) === null || _c === void 0 ? void 0 : _c.blocs.length) > 0) {
                 alumneModificat.moduls[0].blocs = alumneModificat.moduls[0].blocs.slice(1);
             }
             // Canviar notes
-            if (alumneModificat.moduls[0]?.blocs[0]) {
+            if ((_d = alumneModificat.moduls[0]) === null || _d === void 0 ? void 0 : _d.blocs[0]) {
                 alumneModificat.moduls[0].blocs[0].nota = 6; // Bloc nota de 5 a 6
             }
-            if (alumneModificat.moduls[0]?.blocs[1]) {
+            if ((_e = alumneModificat.moduls[0]) === null || _e === void 0 ? void 0 : _e.blocs[1]) {
                 alumneModificat.moduls[0].blocs[1].nota = 8; // Bloc nota de 7 a 8
             }
         }
@@ -110,13 +111,13 @@ function modificarAlumnes(alumnes) {
                 blocs: [{ nom: "Bloc - Anglès", nota: 6 }]
             });
             // Modificar notes existents
-            if (alumneModificat.moduls[0]?.blocs[0]) {
+            if ((_f = alumneModificat.moduls[0]) === null || _f === void 0 ? void 0 : _f.blocs[0]) {
                 alumneModificat.moduls[0].blocs[0].nota = 10; // Bloc 3: de 9 -> 10
             }
-            if (alumneModificat.moduls[0]?.blocs[1]) {
+            if ((_g = alumneModificat.moduls[0]) === null || _g === void 0 ? void 0 : _g.blocs[1]) {
                 alumneModificat.moduls[0].blocs[1].nota = 9; // Bloc 2 nota de 8 a 9
             }
-            if (alumneModificat.moduls[0]?.blocs[2]) {
+            if ((_h = alumneModificat.moduls[0]) === null || _h === void 0 ? void 0 : _h.blocs[2]) {
                 alumneModificat.moduls[0].blocs[2].nota = 9; // Bloc 3: de 10 -> 9
             }
         }
@@ -152,3 +153,4 @@ function calcularMitjanaModul(alumne) {
     });
     return alumne;
 }
+//# sourceMappingURL=alumnes.js.map

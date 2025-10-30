@@ -36,7 +36,7 @@ function imc(pes, altura) {
     let nPes = parseFloat(sPes);
     let nAltura = parseFloat(sAltura);
     // Calculem l'IMC
-    let imcValue = nPes / (nAltura / 100) ** 2;
+    let imcValue = nPes / Math.pow((nAltura / 100), 2);
     let imcFormatted = imcValue.toLocaleString("es-ES", {
         minimumFractionDigits: 1,
         maximumFractionDigits: 1,
@@ -103,7 +103,7 @@ function convertidor(valor, uni1, uni2) {
         throw new Error("Error en les dades d'entrada; unitat no vàlida");
     }
     // Calculem el factor de conversió
-    let factor = 10 ** (unidades[uni1] - unidades[uni2]);
+    let factor = Math.pow(10, (unidades[uni1] - unidades[uni2]));
     // Convertim el valor
     let resultado = nValor * factor;
     // Retornem el resultat amb 4 dígits significatius
@@ -183,3 +183,4 @@ window.imc = imc;
 window.convertidor = convertidor;
 window.bigFloat = bigFloat;
 window.interseccio = interseccio;
+//# sourceMappingURL=Ciencies.js.map

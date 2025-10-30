@@ -51,3 +51,4 @@ console.log("Array de 10 elements aleatoris:");
 arrayAleatori(10);
 console.log("Array filtrats parells i imparells:");
 filtrarPares(arrayAleatori(10));
+//# sourceMappingURL=ExercicisLlistes.js.map

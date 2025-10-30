@@ -165,147 +165,147 @@ class Domotica {
   actuadors: Actuador[];
   autoMode: boolean = false;
   intervalId: number | null = null;
-
+  
   constructor(sensors: Sensor[], actuadors: Actuador[]) {
     this.sensors = sensors;
     this.actuadors = actuadors;
-    this.inicialitzarEventListeners();
+    inicialitzarEventListeners(this);
+  }
+}
+
+// --- Funcions top-level que abans eren mètodes de Domotica ---
+function inicialitzarEventListeners(dom: Domotica): void {
+  // Botó aplicar lògica
+  const btnAvaluar = document.getElementById("avaluar");
+  if (btnAvaluar) {
+    btnAvaluar.addEventListener("click", () => aplicarLogicaTotes(dom));
   }
 
-  inicialitzarEventListeners(): void {
-    // Botó aplicar lògica
-    const btnAvaluar = document.getElementById("avaluar");
-    if (btnAvaluar) {
-      btnAvaluar.addEventListener("click", () => this.aplicarLogicaTotes());
+  // Botó mode automàtic
+  const btnAuto = document.getElementById("modoAutomatico");
+  if (btnAuto) {
+    btnAuto.addEventListener("click", () => modoAutomatico(dom));
+  }
+}
+
+function actualitzarSensors(dom: Domotica): void {
+  const habitacions = ["sala", "cuina", "dormitori", "bany", "menjador"];
+
+  habitacions.forEach((habitacio) => {
+    // Buscar sensors de cada habitació
+    const sensorPresencia = dom.sensors.find((s) => s.nom === `Presencia-${habitacio}`) as SensorPresencia | undefined;
+    const sensorLlum = dom.sensors.find((s) => s.nom === `Llum-${habitacio}`) as SensorLlum | undefined;
+    const sensorTemp = dom.sensors.find((s) => s.nom === `Temp-${habitacio}`) as SensorTemperatura | undefined;
+    const sensorPluja = dom.sensors.find((s) => s.nom === `Pluja-${habitacio}`) as SensorPluja | undefined;
+    const sensorFum = dom.sensors.find((s) => s.nom === `Fum-${habitacio}`) as SensorFum | undefined;
+
+    // Actualitzar amb valors del HTML
+    const presenciaEl = document.getElementById(`pres-${habitacio}`) as HTMLInputElement | null;
+    const llumEl = document.getElementById(`luz-${habitacio}`) as HTMLSelectElement | null;
+    const tempEl = document.getElementById(`temp-${habitacio}`) as HTMLInputElement | null;
+    const pluviaEl = document.getElementById(`lluvia-${habitacio}`) as HTMLInputElement | null;
+    const fumEl = document.getElementById(`humo-${habitacio}`) as HTMLInputElement | null;
+
+    if (sensorPresencia && presenciaEl) sensorPresencia.valor = presenciaEl.checked;
+    if (sensorLlum && llumEl) sensorLlum.valor = llumEl.value;
+    if (sensorTemp && tempEl) sensorTemp.valor = parseInt(tempEl.value) || 0;
+    if (sensorPluja && pluviaEl) sensorPluja.valor = pluviaEl.checked;
+    if (sensorFum && fumEl) sensorFum.valor = fumEl.checked;
+  });
+}
+
+function aplicarLogicaTotes(dom: Domotica): void {
+  // Actualitzar sensors primer
+  actualitzarSensors(dom);
+
+  const habitacions = ["sala", "cuina", "dormitori", "bany", "menjador"];
+
+  habitacions.forEach((habitacio) => {
+    // Buscar sensors de la habitació
+    const sensorPresencia = dom.sensors.find((s) => s.nom === `Presencia-${habitacio}`) as SensorPresencia | undefined;
+    const sensorLlum = dom.sensors.find((s) => s.nom === `Llum-${habitacio}`) as SensorLlum | undefined;
+    const sensorTemp = dom.sensors.find((s) => s.nom === `Temp-${habitacio}`) as SensorTemperatura | undefined;
+    const sensorPluja = dom.sensors.find((s) => s.nom === `Pluja-${habitacio}`) as SensorPluja | undefined;
+    const sensorFum = dom.sensors.find((s) => s.nom === `Fum-${habitacio}`) as SensorFum | undefined;
+
+    // Buscar actuadors de la habitació
+    const motor = dom.actuadors.find((a) => a.nom === `Motor-${habitacio}`) as Motor | undefined;
+    const interruptor = dom.actuadors.find((a) => a.nom === `Interruptor-${habitacio}`) as Interruptor | undefined;
+    const calefaccio = dom.actuadors.find((a) => a.nom === `Calefaccio-${habitacio}`) as Calefaccio | undefined;
+    const aireCondicionat = dom.actuadors.find((a) => a.nom === `AC-${habitacio}`) as AireCondicionat | undefined;
+    const extintor = dom.actuadors.find((a) => a.nom === `Extintor-${habitacio}`) as Extintor | undefined;
+
+    // Aplicar lògica
+    let estatPersiana = "-";
+    let estatLlum = "-";
+    let estatCalefaccio = "-";
+    let estatAC = "-";
+    let estatExtintor = "-";
+
+    if (motor && sensorPluja) {
+      estatPersiana = motor.controlarPersianes(sensorPluja);
+    }
+    if (interruptor && sensorPresencia && sensorLlum) {
+      estatLlum = interruptor.controlarLlum(sensorPresencia, sensorLlum);
+    }
+    if (calefaccio && sensorTemp) {
+      estatCalefaccio = calefaccio.controlarClima(sensorTemp);
+    }
+    if (aireCondicionat && sensorTemp) {
+      estatAC = aireCondicionat.controlarClima(sensorTemp);
+    }
+    if (extintor && sensorFum) {
+      estatExtintor = extintor.controlarExtintor(sensorFum);
     }
 
-    // Botó mode automàtic
-    const btnAuto = document.getElementById("modoAutomatico");
-    if (btnAuto) {
-      btnAuto.addEventListener("click", () => this.modoAutomatico());
+    // Actualitzar interfície
+    actualitzarInterficie(dom, habitacio, estatPersiana, estatLlum, estatCalefaccio, estatAC, estatExtintor);
+  });
+
+  log("Lògica aplicada a totes les habitacions");
+}
+
+// Actualitzar la interfície amb els estats dels actuadors
+function actualitzarInterficie(dom: Domotica, habitacio: string, persiana: string, llum: string, calefaccio: string, ac: string, extintor: string): void {
+  const persianaEl = document.getElementById(`act-persiana-${habitacio}`);
+  const llumEl = document.getElementById(`act-llum-${habitacio}`);
+  const calefaccioEl = document.getElementById(`act-calef-${habitacio}`);
+  const acEl = document.getElementById(`act-ac-${habitacio}`);
+  const extintorEl = document.getElementById(`act-extintor-${habitacio}`);
+
+  if (persianaEl) persianaEl.textContent = persiana;
+  if (llumEl) llumEl.textContent = llum;
+  if (calefaccioEl) calefaccioEl.textContent = calefaccio;
+  if (acEl) acEl.textContent = ac;
+  if (extintorEl) extintorEl.textContent = extintor;
+}
+
+function modoAutomatico(dom: Domotica): void {
+  dom.autoMode = !dom.autoMode;
+  const btnAuto = document.getElementById("modoAutomatico");
+
+  if (dom.autoMode) {
+    if (btnAuto) btnAuto.textContent = "Auto (ON)";
+    dom.intervalId = window.setInterval(() => {
+      aplicarLogicaTotes(dom);
+    }, 2000); // Actualitzar cada 2 segons
+    log("Mode automàtic activat");
+  } else {
+    if (btnAuto) btnAuto.textContent = "Auto";
+    if (dom.intervalId !== null) {
+      clearInterval(dom.intervalId);
+      dom.intervalId = null;
     }
+    log("Mode automàtic desactivat");
   }
+}
 
-  // Actualitzar tots els sensors amb valors de la interfície
-  actualitzarSensors(): void {
-    const habitacions = ["sala", "cuina", "dormitori", "bany", "menjador"];
-    
-    habitacions.forEach(habitacio => {
-      // Buscar sensors de cada habitació
-      const sensorPresencia = this.sensors.find(s => s.nom === `Presencia-${habitacio}`) as SensorPresencia;
-      const sensorLlum = this.sensors.find(s => s.nom === `Llum-${habitacio}`) as SensorLlum;
-      const sensorTemp = this.sensors.find(s => s.nom === `Temp-${habitacio}`) as SensorTemperatura;
-      const sensorPluja = this.sensors.find(s => s.nom === `Pluja-${habitacio}`) as SensorPluja;
-      const sensorFum = this.sensors.find(s => s.nom === `Fum-${habitacio}`) as SensorFum;
-
-      // Actualitzar amb valors del HTML
-      const presenciaEl = document.getElementById(`pres-${habitacio}`) as HTMLInputElement;
-      const llumEl = document.getElementById(`luz-${habitacio}`) as HTMLSelectElement;
-      const tempEl = document.getElementById(`temp-${habitacio}`) as HTMLInputElement;
-      const pluviaEl = document.getElementById(`lluvia-${habitacio}`) as HTMLInputElement;
-      const fumEl = document.getElementById(`humo-${habitacio}`) as HTMLInputElement;
-
-      if (sensorPresencia && presenciaEl) sensorPresencia.valor = presenciaEl.checked;
-      if (sensorLlum && llumEl) sensorLlum.valor = llumEl.value;
-      if (sensorTemp && tempEl) sensorTemp.valor = parseInt(tempEl.value);
-      if (sensorPluja && pluviaEl) sensorPluja.valor = pluviaEl.checked;
-      if (sensorFum && fumEl) sensorFum.valor = fumEl.checked;
-    });
-  }
-
-  aplicarLogicaTotes(): void {
-    // Actualitzar sensors primer
-    this.actualitzarSensors();
-
-    const habitacions = ["sala", "cuina", "dormitori", "bany", "menjador"];
-    
-    habitacions.forEach(habitacio => {
-      // Buscar sensors de la habitació
-      const sensorPresencia = this.sensors.find(s => s.nom === `Presencia-${habitacio}`) as SensorPresencia;
-      const sensorLlum = this.sensors.find(s => s.nom === `Llum-${habitacio}`) as SensorLlum;
-      const sensorTemp = this.sensors.find(s => s.nom === `Temp-${habitacio}`) as SensorTemperatura;
-      const sensorPluja = this.sensors.find(s => s.nom === `Pluja-${habitacio}`) as SensorPluja;
-      const sensorFum = this.sensors.find(s => s.nom === `Fum-${habitacio}`) as SensorFum;
-
-      // Buscar actuadors de la habitació
-      const motor = this.actuadors.find(a => a.nom === `Motor-${habitacio}`) as Motor;
-      const interruptor = this.actuadors.find(a => a.nom === `Interruptor-${habitacio}`) as Interruptor;
-      const calefaccio = this.actuadors.find(a => a.nom === `Calefaccio-${habitacio}`) as Calefaccio;
-      const aireCondicionat = this.actuadors.find(a => a.nom === `AC-${habitacio}`) as AireCondicionat;
-      const extintor = this.actuadors.find(a => a.nom === `Extintor-${habitacio}`) as Extintor;
-
-      // Aplicar lògica
-      let estatPersiana = "-";
-      let estatLlum = "-";
-      let estatCalefaccio = "-";
-      let estatAC = "-";
-      let estatExtintor = "-";
-
-      if (motor && sensorPluja) {
-        estatPersiana = motor.controlarPersianes(sensorPluja);
-      }
-      if (interruptor && sensorPresencia && sensorLlum) {
-        estatLlum = interruptor.controlarLlum(sensorPresencia, sensorLlum);
-      }
-      if (calefaccio && sensorTemp) {
-        estatCalefaccio = calefaccio.controlarClima(sensorTemp);
-      }
-      if (aireCondicionat && sensorTemp) {
-        estatAC = aireCondicionat.controlarClima(sensorTemp);
-      }
-      if (extintor && sensorFum) {
-        estatExtintor = extintor.controlarExtintor(sensorFum);
-      }
-
-      // Actualitzar interfície
-      this.actualitzarInterficie(habitacio, estatPersiana, estatLlum, estatCalefaccio, estatAC, estatExtintor);
-    });
-
-    this.log("Lògica aplicada a totes les habitacions");
-  }
-
-  // Actualitzar la interfície amb els estats dels actuadors
-  actualitzarInterficie(habitacio: string, persiana: string, llum: string, calefaccio: string, ac: string, extintor: string): void {
-    const persianaEl = document.getElementById(`act-persiana-${habitacio}`);
-    const llumEl = document.getElementById(`act-llum-${habitacio}`);
-    const calefaccioEl = document.getElementById(`act-calef-${habitacio}`);
-    const acEl = document.getElementById(`act-ac-${habitacio}`);
-    const extintorEl = document.getElementById(`act-extintor-${habitacio}`);
-
-    if (persianaEl) persianaEl.textContent = persiana;
-    if (llumEl) llumEl.textContent = llum;
-    if (calefaccioEl) calefaccioEl.textContent = calefaccio;
-    if (acEl) acEl.textContent = ac;
-    if (extintorEl) extintorEl.textContent = extintor;
-  }
-
-  modoAutomatico(): void {
-    this.autoMode = !this.autoMode;
-    const btnAuto = document.getElementById("modoAutomatico");
-
-    if (this.autoMode) {
-      if (btnAuto) btnAuto.textContent = "Auto (ON)";
-      this.intervalId = window.setInterval(() => {
-        this.aplicarLogicaTotes();
-      }, 2000); // Actualitzar cada 2 segons
-      this.log("Mode automàtic activat");
-    } else {
-      if (btnAuto) btnAuto.textContent = "Auto";
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-        this.intervalId = null;
-      }
-      this.log("Mode automàtic desactivat");
-    }
-  }
-
-  log(missatge: string): void {
-    const logEl = document.getElementById("log");
-    if (logEl) {
-      const timestamp = new Date().toLocaleTimeString();
-      logEl.textContent += `[${timestamp}] ${missatge}\n`;
-      logEl.scrollTop = logEl.scrollHeight;
-    }
+function log(missatge: string): void {
+  const logEl = document.getElementById("log");
+  if (logEl) {
+    const timestamp = new Date().toLocaleTimeString();
+    logEl.textContent += `[${timestamp}] ${missatge}\n`;
+    logEl.scrollTop = logEl.scrollHeight;
   }
 }
 
@@ -335,5 +335,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Crear objecte domotica amb els dos arrays
-  new Domotica(sensors, actuadors);
+  const casa = new Domotica(sensors, actuadors);
 });

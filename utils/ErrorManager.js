@@ -37,3 +37,4 @@ export function isNumber(value, min, max) {
     // Si totes les comprovacions passen, és un número vàlid
     return true;
 }
+//# sourceMappingURL=ErrorManager.js.map

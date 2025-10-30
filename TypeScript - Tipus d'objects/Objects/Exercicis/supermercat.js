@@ -144,3 +144,4 @@ afegirProductes(iogurt);
 // Filtrar productes per atribut i valor
 console.log("\nFiltrar productes amb volum = 1:");
 buscarIMostrarPerValor(productes, 'volum', 1);
+//# sourceMappingURL=supermercat.js.map

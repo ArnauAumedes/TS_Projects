@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LocalChat - Admin</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <h2>Admin - LocalChat</h2>
+
+    <div id="controls">
+        <input id="adminMessage" placeholder="Missatge admin..." />
+        <button id="sendAdmin">Enviar</button>
+    </div>
+
+    <section>
+        <h3>Missatges</h3>
+        <textarea id="adminStorage" rows="20" readonly></textarea>
+    </section>
+
+    <section>
+        <h3>Controls</h3>
+        <button id="cleanChat">Netejar Xat</button>
+        <button id="createUsers">Crear Usuaris</button>
+        <button id="closeUsers">Tancar Usuaris</button>
+    </section>
+
+    <script src="dist/Admin.js"></script>
+</body>
+</html>

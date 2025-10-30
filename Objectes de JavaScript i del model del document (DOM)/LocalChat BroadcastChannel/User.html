@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LocalChat - User</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+    <h2>Usuari</h2>
+    <div>userId: <span id="userIdLabel"></span></div>
+
+    <div>
+        <input id="userMessage" placeholder="Missatge...">
+        <button id="sendUser">Enviar</button>
+    </div>
+
+    <section>
+        <h3>Missatges</h3>
+        <textarea id="userStorage" rows="20" readonly></textarea>
+    </section>
+    <script src="dist/User.js"></script>
+</body>
+</html>
