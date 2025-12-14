@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panell animat</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; padding: 16px; background:#fafafa; }
+        header { margin-bottom: 12px; }
+        .info { color:#444; margin-bottom:12px; }
+        .notice { font-size:0.9em; color:#666; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panell animat</h1>
+        <p class="info">Utilitza els botons <strong>Esquerra</strong> i <strong>Dreta</strong> per desplaçar la imatge amb wrap-around.</p>
+        <p class="notice">Nota: compila els fitxers TypeScript a JavaScript abans d'obrir aquesta pàgina (veure instruccions més avall).</p>
+    </header>
+
+    <main>
+        <!-- El script crea el contenidor i la taula al carregar-se. -->
+    </main>
+
+    <!-- Carrega el mòdul compilat. Assegura't d'executar `tsc` per generar `script.js`. -->
+    <script type="module" src="../js/script.js"></script>
+
+    <noscript>
+        <p>Cal habilitar JavaScript per veure aquest exercici.</p>
+    </noscript>
+
+    <!-- Instruccions ràpides per compilar/servir (Windows PowerShell) -->
+    <!--
+    1) Compilar TypeScript: `npx tsc` (executa-ho des de la carpeta del projecte)
+    2) Servir els fitxers per provar mòduls al navegador:
+       - Instal·lar `http-server` i executar: `npx http-server . -p 8000`
+       - o bé: `python -m http.server 8000`
+    3) Obre: http://localhost:8000/panell-animat/index.html
+    -->
+</body>
+</html>
