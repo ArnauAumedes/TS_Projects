@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "skipLibCheck": true,
+      "target": "es6",
+      "sourceMap": false,
+      "noEmitOnError": true,
+      "noImplicitAny": true,
+      "strict": true,
+      "lib": ["es2017", "dom"],
+      "rootDir": "ts",
+      "outDir": "app/js",
+      "module": "es2020",
+      "moduleResolution": "Bundler",
+      "allowSyntheticDefaultImports": true
+  }
+}

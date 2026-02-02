@@ -1,0 +1,135 @@
+/* Estils generals de la pàgina */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 1rem;
+  background: #f5f5f5;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+header p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Component interactive-map: contenidor amb Shadow DOM implícit (no usem shadow) */
+interactive-map {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  min-height: 500px;
+}
+
+/* Layout: etiquetes a l’esquerra, mapa a la dreta */
+.interactive-map__layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.interactive-map__labels {
+  flex: 0 0 200px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.interactive-map__labels-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Cada etiqueta arrossegable */
+.interactive-map__label {
+  padding: 0.5rem 0.75rem;
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+  cursor: grab;
+  font-size: 0.9rem;
+  user-select: none;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.interactive-map__label:hover {
+  background: #bbdefb;
+}
+
+.interactive-map__label:active,
+.interactive-map__label--dragging {
+  cursor: grabbing;
+  opacity: 0.85;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenidor del mapa SVG */
+.interactive-map__map {
+  flex: 1 1 500px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.interactive-map__svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Zones del mapa (paths): per defecte */
+.interactive-map__zone {
+  cursor: pointer;
+  transition: fill 0.15s, filter 0.15s;
+}
+
+/* Quan es passa el DIV per sobre de la zona (dragenter/dragover) */
+.interactive-map__zone--over {
+  fill: #a5d6a7 !important;
+  filter: brightness(1.05);
+}
+
+/* Missatge de felicitació i de final */
+.interactive-map__message {
+  margin-top: 1rem;
+  min-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e7d32;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.interactive-map__message--visible {
+  opacity: 1;
+}
+
+.interactive-map__message--success {
+  font-size: 1.1rem;
+  color: #1b5e20;
+}

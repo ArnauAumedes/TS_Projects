@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa interactiu - Comarques de Catalunya</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Mapa interactiu</h1>
+    <p>Arrossega cada etiqueta sobre la zona correcta del mapa.</p>
+    <p>
+      <input type="file" id="map-file" accept=".svg,image/svg+xml" hidden />
+      <label for="map-file">Tria un mapa (SVG)</label>
+    </p>
+  </header>
+  <main>
+    <interactive-map></interactive-map>
+  </main>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
