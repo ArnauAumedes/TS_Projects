@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prova de Components - ButtonSwitch</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+    <h1>Prova de Components</h1>
+    <section>
+        <h2>ButtonSwitch</h2>
+        <button-switch id="sw"></button-switch>
+        <span id="switch-state"></span>
+    </section>
+    <section>
+        <h2>CheckboxList</h2>
+        <checkbox-list id="cb-list"></checkbox-list>
+    </section>
+    <section>
+        <h2>ExpandableList</h2>
+        <expandable-list id="exp-list"></expandable-list>
+    </section>
+    <section>
+        <h2>PercentStepper</h2>
+        <percent-stepper value="0" step="10"></percent-stepper>
+        <span id="ps-value"></span>
+    </section>
+    <section>
+        <h2>SelectList Simple</h2>
+        <select-list id="sl-simple">
+            <ul>
+                <li data-value="a">Opció A</li>
+                <li data-value="b">Opció B</li>
+                <li data-value="c">Opció C</li>
+            </ul>
+        </select-list>
+        <span id="sl-simple-value"></span>
+    </section>
+    <section>
+        <h2>SelectList Múltiple</h2>
+        <select-list id="sl-multiple" multiple>
+            <ul>
+                <li data-value="a">Opció A</li>
+                <li data-value="b">Opció B</li>
+                <li data-value="c">Opció C</li>
+            </ul>
+        </select-list>
+        <span id="sl-multiple-value"></span>
+    </section>
+    <section>
+        <h2>SortableList</h2>
+        <sortable-list id="sortable">
+            <ul>
+                <li>Element B</li>
+                <li>Element C</li>
+                <li>Element A</li>
+
+            </ul>
+        </sortable-list>
+        <span id="sortable-values"></span>
+    </section>
+    <section>
+        <h2>TabList</h2>
+        <tab-list id="tabs">
+            <div role="tablist">
+                <button role="tab" data-tab="general">General</button>
+                <button role="tab" data-tab="settings">Configuració</button>
+                <button role="tab" data-tab="about">Sobre</button>
+            </div>
+            <section role="tabpanel" data-tab="general">
+                Contingut General
+            </section>
+            <section role="tabpanel" data-tab="settings">
+                Contingut Configuració
+            </section>
+            <section role="tabpanel" data-tab="about">
+                Contingut Sobre
+            </section>
+        </tab-list>
+        <span id="tab-active"></span>
+    </section>
+</body>
+
+</html>

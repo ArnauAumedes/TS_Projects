@@ -1,0 +1,8 @@
+.tema{width:35rem;margin:1rem;padding:1rem;border:1px solid #808080;border-radius:.5rem;}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:1rem;}
+h4{margin:0;}
+svg,video,table{margin:.5rem 0;}
+table{border:1px solid #808080;background-color:#FCFCFC;border-collapse:collapse;border-spacing:0;}
+td{border:1px solid #808080;}
+input{margin:0.2rem;}
+button{margin:0.2rem;}

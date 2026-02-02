@@ -1,0 +1,49 @@
+/* Panel general */
+panell-interactiu {
+  display: block;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Botones de color */
+.controls button[data-color] {
+  width: 40px;
+  height: 16px;
+  border: 2px solid #333;
+  margin-right: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.controls button.selected {
+  outline: 2px solid orange;
+}
+
+/* Botones de animación */
+.animation button {
+  width: 60px;
+  height: 40px;
+  margin: 8px;
+  font-size: 1.5em;
+  background: #e0e0e0;
+  border: 2px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Tabla del panel */
+table.panel {
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table.panel td {
+  width: 5px;
+  height: 5px;
+  border: 1px solid #888;
+  background: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+table.panel td:hover {
+  box-shadow: 0 0 4px #aaa;
+  outline: 1px solid #333;
+}

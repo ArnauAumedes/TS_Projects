@@ -1,0 +1,71 @@
+/* Estructura general del teclado numérico */
+num-keypad {
+  display: block;
+  margin: 2rem auto;
+  max-width: 420px;
+  font-family: Arial, sans-serif;
+}
+num-keypad .display {
+  background: #f3f3f3;
+  border: 2px solid #bbb;
+  border-radius: 8px;
+  font-size: 2rem;
+  text-align: right;
+  padding: 0.7em 1em;
+  margin-bottom: 1em;
+  min-width: 180px;
+  box-sizing: border-box;
+}
+num-keypad .keypad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  justify-content: center;
+}
+num-keypad button {
+  background: #fff;
+  border: 2px solid #bbb;
+  border-radius: 8px;
+  padding: 0.3em;
+  cursor: pointer;
+  transition: border 0.2s, box-shadow 0.2s;
+  min-width: 60px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+num-keypad button:focus {
+  outline: 2px solid #0078d7;
+  border-color: #0078d7;
+}
+/* Monedas */
+num-keypad button[data-key="0.01"] img,
+num-keypad button[data-key="0.02"] img,
+num-keypad button[data-key="0.05"] img,
+num-keypad button[data-key="0.10"] img,
+num-keypad button[data-key="0.20"] img,
+num-keypad button[data-key="0.50"] img,
+num-keypad button[data-key="1.00"] img,
+num-keypad button[data-key="2.00"] img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+/* Billetes */
+num-keypad button[data-key="5.00"] img,
+num-keypad button[data-key="10.00"] img,
+num-keypad button[data-key="20.00"] img,
+num-keypad button[data-key="50.00"] img {
+  width: 80px;
+  height: 48px;
+  object-fit: contain;
+}
+/* Botones especiales */
+num-keypad button[data-key="del"],
+num-keypad button[data-key="ok"] {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 60px;
+  min-height: 60px;
+}

@@ -1,0 +1,9 @@
+#output {
+  font-family: "Helvetica", "Arial", sans-serif;
+  border: 1px solid black;
+  width: 95%;
+  margin: auto;
+}
+#output:focus-visible {
+  outline: 3px solid dodgerblue;
+}

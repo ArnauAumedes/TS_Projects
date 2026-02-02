@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ca">
+    <head>
+        <title>P31-DOM</title>
+        <meta charset="UTF-8" />
+		<link rel="stylesheet" href="P31-DOM.css" type="text/css">
+		<script type="module" src="js/P31-DOM.js"></script>
+    </head>
+
+    <body>
+		<div class="tema">
+			<h4>PANELL</h4>
+			<div id="panell"></div>
+		</div>
+
+		<div class="tema">
+			<h4>ÀUDIO</h4>
+			<audio src="CC.mp3">
+				El teu navegador no suporta elements d'àudio
+			</audio>
+		</div>
+
+		<div class="tema">
+			<h4>NOTES</h4>
+			<svg id="notes" width="520" height="250" viewBox="0 0 520 250">
+				<g>
+					<line x1="10" y1="0" x2="10" y2="250" stroke="#000"></line>
+					<line x1="0" y1="240" x2="520" y2="240" stroke="#000"></line>
+				</g>
+			</svg><br>
+			&nbsp;&nbsp;&nbsp;UF1<input type="number" id="uf1" min="0" max="10" step="1" value="5" style="width:3em">
+			UF2<input type="number" id="uf2" min="0" max="10" step="1" value="5" style="width:3em">
+			UF3<input type="number" id="uf3" min="0" max="10" step="1" value="5" style="width:3em">
+			UF4<input type="number" id="uf4" min="0" max="10" step="1" value="5" style="width:3em">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ampliar<input type="number" id="ampliacio" min="5" max="20" step="1" value="10" style="width:3em"><br>
+		</div>
+
+		<div class="tema">
+			<h4>VÍDEO</h4>
+			<video width="400" src="HE.mp4">
+				El teu navegador no suporta elements de vídeo
+			</video>
+		</div>
+
+    </body>
+</html>
